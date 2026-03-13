@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Akib Saify — Legal & Compliance Professional</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --navy: #05196c;
+      --navy-light: #0a2580;
+      --gold: #c9a84c;
+      --gold-light: #e8c96a;
+      --cream: #f5f0e8;
+      --slate: #8a9bb5;
+      --dark: #060d1f;
+      --white: #ffffff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--dark);
+      color: var(--cream);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.4rem 4rem;
+      background: rgba(6, 13, 31, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201, 168, 76, 0.12);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      color: var(--slate);
+      text-decoration: none;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 0 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 80% at 80% 50%, rgba(5, 25, 108, 0.45) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(201, 168, 76, 0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-grid-lines {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    .hero-content { position: relative; z-index: 1; }
+
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(201,168,76,0.4);
+      padding: 0.35rem 0.9rem;
+      margin-bottom: 2rem;
+      border-radius: 2px;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 5vw, 5.5rem);
+      line-height: 1.05;
+      font-weight: 700;
+      margin-bottom: 1.4rem;
+      animation: fadeUp 0.8s 0.15s ease both;
+    }
+
+    .hero-name em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--slate);
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.8s 0.3s ease both;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      animation: fadeUp 0.8s 0.45s ease both;
+    }
+
+    .btn {
+      padding: 0.85rem 2rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--dark);
+      font-weight: 500;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+    .btn-outline {
+      border: 1px solid rgba(201,168,76,0.4);
+      color: var(--gold);
+    }
+    .btn-outline:hover { background: rgba(201,168,76,0.08); transform: translateY(-2px); }
+
+    .hero-visual {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 4px;
+      padding: 2.5rem;
+      width: 340px;
+      animation: fadeUp 0.8s 0.5s ease both;
+      position: relative;
+    }
+
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: 2rem; right: 2rem;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .card-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      opacity: 0.7;
+    }
+
+    .card-stat {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .card-stat:last-child { border-bottom: none; }
+
+    .stat-label { font-size: 0.8rem; color: var(--slate); }
+    .stat-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--cream);
+    }
+    .stat-value span { font-size: 0.8rem; color: var(--gold); margin-left: 0.3rem; }
+
+    /* ── SECTIONS ── */
+    section { padding: 7rem 4rem; position: relative; }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 2.5rem;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .section-label span {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      line-height: 1.15;
+      max-width: 700px;
+      margin-bottom: 4rem;
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: var(--slate);
+      margin-bottom: 1.2rem;
+    }
+
+    .about-text p strong { color: var(--cream); font-weight: 500; }
+
+    .cert-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(201,168,76,0.08);
+      border: 1px solid rgba(201,168,76,0.25);
+      padding: 0.6rem 1.1rem;
+      border-radius: 2px;
+      margin-top: 1.5rem;
+    }
+
+    .cert-badge span {
+      font-size: 0.78rem;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .stat-box {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 4px;
+      padding: 1.8rem 1.5rem;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .stat-box:hover { border-color: rgba(201,168,76,0.3); transform: translateY(-3px); }
+
+    .stat-box-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-box-label {
+      font-size: 0.78rem;
+      color: var(--slate);
+      line-height: 1.4;
+    }
+
+    /* ── EXPERTISE ── */
+    .expertise { background: rgba(5,25,108,0.08); }
+
+    .expertise-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .expertise-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 4px;
+      padding: 2rem 1.8rem;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .expertise-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--navy), var(--gold));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .expertise-card:hover { border-color: rgba(201,168,76,0.2); transform: translateY(-4px); }
+    .expertise-card:hover::after { transform: scaleX(1); }
+
+    .expertise-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .expertise-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: var(--cream);
+      margin-bottom: 0.7rem;
+    }
+
+    .expertise-desc {
+      font-size: 0.85rem;
+      line-height: 1.7;
+      color: var(--slate);
+    }
+
+    /* ── EXPERIENCE ── */
+    .timeline { position: relative; padding-left: 2rem; }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0.5rem; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-bottom: 3.5rem;
+      padding-left: 2rem;
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .timeline-item.visible { opacity: 1; transform: translateX(0); }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2.4rem;
+      top: 0.4rem;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: 2px solid var(--dark);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.2);
+    }
+
+    .timeline-date {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-role {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      color: var(--cream);
+      margin-bottom: 0.3rem;
+    }
+
+    .timeline-company {
+      font-size: 0.88rem;
+      color: var(--slate);
+      margin-bottom: 1rem;
+    }
+
+    .timeline-desc {
+      font-size: 0.88rem;
+      line-height: 1.8;
+      color: var(--slate);
+      max-width: 600px;
+    }
+
+    /* ── SKILLS TAGS ── */
+    .skills-section { background: rgba(5,25,108,0.08); }
+
+    .skills-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .skill-tag {
+      padding: 0.5rem 1.2rem;
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 2px;
+      font-size: 0.8rem;
+      color: var(--slate);
+      letter-spacing: 0.05em;
+      transition: all 0.3s;
+      cursor: default;
+    }
+    .skill-tag:hover { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,0.06); }
+
+    /* ── CONTACT ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .contact-text {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: var(--slate);
+    }
+
+    .contact-links { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: var(--slate);
+      font-size: 0.9rem;
+      transition: color 0.3s;
+      group: true;
+    }
+    .contact-link:hover { color: var(--gold); }
+
+    .contact-link-icon {
+      width: 36px;
+      height: 36px;
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+      flex-shrink: 0;
+    }
+    .contact-link:hover .contact-link-icon {
+      border-color: var(--gold);
+      background: rgba(201,168,76,0.08);
+      color: var(--gold);
+    }
+
+    .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
+
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+
+    .form-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--slate);
+    }
+
+    .form-input, .form-textarea {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 2px;
+      padding: 0.85rem 1rem;
+      color: var(--cream);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    .form-input:focus, .form-textarea:focus { border-color: rgba(201,168,76,0.5); }
+
+    .form-textarea { resize: vertical; min-height: 120px; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2rem 4rem;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-text {
+      font-size: 0.78rem;
+      color: var(--slate);
+    }
+
+    .footer-text span { color: var(--gold); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 2rem; }
+      .nav-links { display: none; }
+      .hero, section { padding-left: 2rem; padding-right: 2rem; }
+      .hero { grid-template-columns: 1fr; padding-top: 7rem; padding-bottom: 4rem; }
+      .hero-visual { display: none; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .expertise-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .expertise-grid { grid-template-columns: 1fr; }
+      .about-stats { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Akib Saify</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#expertise">Expertise</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-grid-lines"></div>
+
+    <div class="hero-content">
+      <div class="hero-tag">Legal & Compliance Professional</div>
+      <h1 class="hero-name">Akib<br/><em>Saify</em></h1>
+      <p class="hero-desc">
+        Compliance Operations Manager with 8+ years navigating AML, fraud analysis, and multi-jurisdictional regulatory frameworks. Turning complex regulatory requirements into actionable, risk-resilient systems.
+      </p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn btn-primary">Get in Touch</a>
+        <a href="#experience" class="btn btn-outline">View Experience</a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="card-label">Career Snapshot</div>
+        <div class="card-stat">
+          <span class="stat-label">Experience</span>
+          <span class="stat-value">8+ <span>Years</span></span>
+        </div>
+        <div class="card-stat">
+          <span class="stat-label">Specialisation</span>
+          <span class="stat-value" style="font-size:1rem;">AML & Fraud</span>
+        </div>
+        <div class="card-stat">
+          <span class="stat-label">Current Role</span>
+          <span class="stat-value" style="font-size:0.95rem;">Manager, Ops</span>
+        </div>
+        <div class="card-stat">
+          <span class="stat-label">Certification</span>
+          <span class="stat-value" style="font-size:1rem;">ACFCS</span>
+        </div>
+        <div class="card-stat">
+          <span class="stat-label">Jurisdiction</span>
+          <span class="stat-value" style="font-size:0.95rem;">Global</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-label"><span>About Me</span></div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I'm a <strong>Legal & Compliance Operations Manager</strong> at Marsh McLennan, bringing over 8 years of specialised experience in AML, fraud analysis, and regulatory compliance across multiple jurisdictions.
+        </p>
+        <p>
+          My career journey is unconventional — I hold a <strong>bachelor's degree in Hospitality</strong>, which gave me a sharp foundation in client focus and operational excellence before I transitioned fully into the world of financial compliance. That cross-domain perspective is something I bring to every engagement.
+        </p>
+        <p>
+          I operate at the intersection of <strong>risk management, regulatory intelligence, and operational efficiency</strong> — designing frameworks that are not just compliant, but genuinely robust under scrutiny.
+        </p>
+        <div class="cert-badge">
+          <span>🏆</span>
+          <span>ACFCS Certified — Association of Certified Financial Crime Specialists</span>
+        </div>
+      </div>
+      <div class="about-stats">
+        <div class="stat-box">
+          <div class="stat-box-num">8+</div>
+          <div class="stat-box-label">Years in compliance & financial crime</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-box-num">Multi</div>
+          <div class="stat-box-label">Jurisdictional regulatory expertise</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-box-num">AML</div>
+          <div class="stat-box-label">Anti-money laundering specialist</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-box-num">MMC</div>
+          <div class="stat-box-label">Marsh McLennan — Global leader</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERTISE -->
+  <section id="expertise" class="expertise">
+    <div class="section-label"><span>Core Expertise</span></div>
+    <h2 class="section-title">Where I add the most value</h2>
+    <div class="expertise-grid">
+      <div class="expertise-card">
+        <div class="expertise-icon">🔍</div>
+        <div class="expertise-title">AML & Financial Crime</div>
+        <div class="expertise-desc">Designing and implementing anti-money laundering frameworks, transaction monitoring systems, and suspicious activity detection protocols.</div>
+      </div>
+      <div class="expertise-card">
+        <div class="expertise-icon">🛡️</div>
+        <div class="expertise-title">Fraud Analysis</div>
+        <div class="expertise-desc">Deep forensic analysis of fraud patterns, red flag identification, and building proactive controls to reduce institutional exposure.</div>
+      </div>
+      <div class="expertise-card">
+        <div class="expertise-icon">⚖️</div>
+        <div class="expertise-title">Regulatory Compliance</div>
+        <div class="expertise-desc">Navigating multi-jurisdictional regulatory obligations across financial services, ensuring policies meet global standards and local requirements.</div>
+      </div>
+      <div class="expertise-card">
+        <div class="expertise-icon">📋</div>
+        <div class="expertise-title">Compliance Operations</div>
+        <div class="expertise-desc">Managing compliance operations end-to-end — from policy development and team oversight to process improvement and audit readiness.</div>
+      </div>
+      <div class="expertise-card">
+        <div class="expertise-icon">🔗</div>
+        <div class="expertise-title">KYC & Due Diligence</div>
+        <div class="expertise-desc">Conducting and overseeing KYC processes, customer risk assessments, and enhanced due diligence on high-risk entities.</div>
+      </div>
+      <div class="expertise-card">
+        <div class="expertise-icon">📊</div>
+        <div class="expertise-title">Risk Framework Design</div>
+        <div class="expertise-desc">Building risk appetite frameworks, control matrices, and escalation pathways that align compliance obligations with business objectives.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-label"><span>Experience</span></div>
+    <h2 class="section-title">Professional journey</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-date">Current Position</div>
+        <div class="timeline-role">Manager — Legal & Compliance Operations</div>
+        <div class="timeline-company">Marsh McLennan · Gurgaon, India</div>
+        <div class="timeline-desc">Leading compliance operations for one of the world's largest insurance broking and risk advisory firms. Overseeing AML/fraud frameworks, multi-jurisdictional regulatory compliance, and operational governance across business units.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">8+ Years Experience</div>
+        <div class="timeline-role">Financial Crime & Compliance Specialist</div>
+        <div class="timeline-company">Financial Services Sector · India</div>
+        <div class="timeline-desc">Progressive career in AML, fraud analysis, and regulatory compliance. Built expertise across transaction monitoring, KYC frameworks, SAR filing, and cross-border regulatory requirements.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Foundation</div>
+        <div class="timeline-role">Career Transition into Finance</div>
+        <div class="timeline-company">From Hospitality to Financial Compliance</div>
+        <div class="timeline-desc">Leveraged a strong foundation in service operations and client management from hospitality to transition into financial services — bringing a distinctive, client-first perspective to compliance roles.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="skills-section">
+    <div class="section-label"><span>Skills & Tools</span></div>
+    <h2 class="section-title">Technical & domain competencies</h2>
+    <div class="skills-cloud">
+      <span class="skill-tag">Anti-Money Laundering (AML)</span>
+      <span class="skill-tag">Fraud Investigation</span>
+      <span class="skill-tag">KYC / CDD / EDD</span>
+      <span class="skill-tag">Regulatory Compliance</span>
+      <span class="skill-tag">Transaction Monitoring</span>
+      <span class="skill-tag">SAR Filing</span>
+      <span class="skill-tag">Risk Assessment</span>
+      <span class="skill-tag">Multi-Jurisdictional Law</span>
+      <span class="skill-tag">FATF Guidelines</span>
+      <span class="skill-tag">Compliance Operations</span>
+      <span class="skill-tag">Policy Development</span>
+      <span class="skill-tag">Internal Controls</span>
+      <span class="skill-tag">Audit Readiness</span>
+      <span class="skill-tag">Team Leadership</span>
+      <span class="skill-tag">Stakeholder Management</span>
+      <span class="skill-tag">ACFCS Certified</span>
+      <span class="skill-tag">Financial Crime Analytics</span>
+      <span class="skill-tag">Sanctions Screening</span>
+      <span class="skill-tag">PEP Screening</span>
+      <span class="skill-tag">Operational Risk</span>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-label"><span>Contact</span></div>
+    <h2 class="section-title">Let's connect</h2>
+    <div class="contact-grid">
+      <div>
+        <p class="contact-text">
+          Whether you're looking to discuss compliance strategy, explore potential collaboration, or just connect professionally — I'm always open to a conversation.
+        </p>
+        <div class="contact-links">
+          <a href="https://www.linkedin.com/in/akibsaify" target="_blank" class="contact-link">
+            <div class="contact-link-icon">in</div>
+            <span>linkedin.com/in/akibsaify</span>
+          </a>
+          <a href="https://instagram.com/akibonline" target="_blank" class="contact-link">
+            <div class="contact-link-icon">📷</div>
+            <span>@akibonline</span>
+          </a>
+          <a href="https://akibsaify.github.io" target="_blank" class="contact-link">
+            <div class="contact-link-icon">🌐</div>
+            <span>akibsaify.github.io</span>
+          </a>
+        </div>
+      </div>
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-group">
+          <label class="form-label">Name</label>
+          <input class="form-input" type="text" placeholder="Your name" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input class="form-input" type="email" placeholder="your@email.com" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message</label>
+          <textarea class="form-textarea" placeholder="What's on your mind?"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="align-self:flex-start;">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-text">© 2026 <span>Akib Saify</span> · blog.0110059.xyz</div>
+    <div class="footer-text">Built with purpose. Designed to last.</div>
+  </footer>
+
+  <script>
+    // Timeline scroll animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.timeline-item').forEach(item => observer.observe(item));
+
+    // Contact form handler
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button');
+      btn.textContent = 'Message Sent ✓';
+      btn.style.background = '#2a7a4b';
+      btn.style.color = '#fff';
+      setTimeout(() => {
+        btn.textContent = 'Send Message';
+        btn.style.background = '';
+        btn.style.color = '';
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
